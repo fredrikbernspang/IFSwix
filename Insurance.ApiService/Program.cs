@@ -1,5 +1,5 @@
-using VehicleInfo.Web;
-using VehicleInfo.Web.Components;
+using Insurance.ApiService;
+using Insurance.ApiService.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 

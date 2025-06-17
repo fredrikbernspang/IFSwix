@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\VehicleInfo.ApiService\VehicleInfo.ApiService.csproj" />
-    <ProjectReference Include="..\VehicleInfo.Web\VehicleInfo.Web.csproj" />
+    <ProjectReference Include="..\Insurance.ApiService\Insurance.ApiService.csproj" />
   </ItemGroup>
 
   <ItemGroup>

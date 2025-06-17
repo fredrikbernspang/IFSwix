@@ -1,4 +1,4 @@
-namespace VehicleInfo.Web;
+namespace Insurance.ApiService;
 
 public class WeatherApiClient(HttpClient httpClient)
 {

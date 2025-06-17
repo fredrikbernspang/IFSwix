@@ -1,13 +1,11 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
-var apiService = builder.AddProject<Projects.VehicleInfo_ApiService>("apiservice")
+var vehicleInfoApiservice = builder.AddProject<Projects.VehicleInfo_ApiService>("vehicleInfoApiService")
     .WithHttpHealthCheck("/health");
 
-/*
-builder.AddProject<Projects.VehicleInfo_Web>("webfrontend")
-    .WithExternalHttpEndpoints()
+builder.AddProject<Projects.Insurance_ApiService>("insuranceApiService")
     .WithHttpHealthCheck("/health")
-    .WithReference(apiService)
-    .WaitFor(apiService);
-*/
+    .WithReference(vehicleInfoApiservice)
+    .WaitFor(vehicleInfoApiservice);
+
 builder.Build().Run();
