@@ -1,9 +1,14 @@
 using Asp.Versioning;
+
 public static class MapGetInsurance
 {
 
     public static WebApplication MapGetInsuranceRoute(this WebApplication app)
     {
+        // Redirect root to Swagger UI
+        app.MapGet("/", () => Results.Redirect("/swagger/index.html"))
+            .WithMetadata(new ExcludeFromDescriptionAttribute()); 
+
         var versionSet = app.NewApiVersionSet()
                 .HasApiVersion(new ApiVersion(1, 0))
                 .ReportApiVersions()
