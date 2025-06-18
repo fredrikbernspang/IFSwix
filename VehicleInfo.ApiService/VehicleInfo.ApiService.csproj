@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\VehicleInfo.ServiceDefaults\VehicleInfo.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\IFSwix.ServiceDefaults\IFSwix.ServiceDefaults.csproj" />
   </ItemGroup>
 
   <ItemGroup>
