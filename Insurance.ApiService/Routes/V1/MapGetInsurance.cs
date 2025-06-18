@@ -18,19 +18,22 @@ public static class MapGetInsurance
             .WithApiVersionSet(versionSet)
             .MapToApiVersion(1.0);
 
-        vehicleGroupV1.MapGet("/", () =>
+        if (app.Environment.IsDevelopment())
         {
-            var resultset = GetInsurance.All();
-            return resultset is not null
-                ? Results.Ok(resultset)
-                : Results.NotFound();
-        })
-        .WithName("GetAllInsurances")
-        .WithOpenApi(operation =>
-        {
-            operation.Description = "Returns all insurances found (testing purposes only).";
-            return operation;
-        });
+            vehicleGroupV1.MapGet("/", () =>
+            {
+                var resultset = GetInsurance.All();
+                return resultset is not null
+                    ? Results.Ok(resultset)
+                    : Results.NotFound();
+            })
+            .WithName("GetAllInsurances")
+            .WithOpenApi(operation =>
+            {
+                operation.Description = "Returns all insurances found (testing purposes only).";
+                return operation;
+            });
+        }
 
         vehicleGroupV1.MapGet("/{id}", (string id) =>
         {

@@ -18,19 +18,22 @@ public static class MapGetVehicle
             .WithApiVersionSet(versionSet)
             .MapToApiVersion(1.0);
 
-        vehicleGroupV1.MapGet("/", () =>
+        if (app.Environment.IsDevelopment())
         {
-            var resultset = GetVehicle.All();
-            return resultset is not null
-                ? Results.Ok(resultset)
-                : Results.NotFound();
-        })
-        .WithName("GetAllVehicles")
-        .WithOpenApi(operation =>
-        {
-            operation.Description = "Returns all vehicles found (testing purposes only).";
-            return operation;
-        });
+            vehicleGroupV1.MapGet("/", () =>
+            {
+                var resultset = GetVehicle.All();
+                return resultset is not null
+                    ? Results.Ok(resultset)
+                    : Results.NotFound();
+            })
+            .WithName("GetAllVehicles")
+            .WithOpenApi(operation =>
+            {
+                operation.Description = "Returns all vehicles found (testing purposes only).";
+                return operation;
+            });
+        }
 
         vehicleGroupV1.MapGet("/{regnum}", (string regnum) =>
         {
