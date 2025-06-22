@@ -18,6 +18,20 @@ public static class MapGetVehicle
             .WithApiVersionSet(versionSet)
             .MapToApiVersion(1.0);
 
+        vehicleGroupV1.MapGet("/{regnum}", (string regnum) =>
+        {
+            var resultset = GetVehicle.Single(regnum);
+            return resultset is not null
+                ? Results.Ok(resultset)
+                : Results.NotFound();
+        })
+        .WithName("GetVehicle")
+        .WithOpenApi(operation =>
+        {
+            operation.Description = "Accepts a vehicle registration number and returns information about the vehicle.";
+            return operation;
+        });
+        
         if (app.Environment.IsDevelopment())
         {
             vehicleGroupV1.MapGet("/", () =>
@@ -34,20 +48,6 @@ public static class MapGetVehicle
                 return operation;
             });
         }
-
-        vehicleGroupV1.MapGet("/{regnum}", (string regnum) =>
-        {
-            var resultset = GetVehicle.Single(regnum);
-            return resultset is not null
-                ? Results.Ok(resultset)
-                : Results.NotFound();
-        })
-        .WithName("GetVehicle")
-        .WithOpenApi(operation =>
-        {
-            operation.Description = "Accepts a vehicle registration number and returns information about the vehicle.";
-            return operation;
-        });
 
         return app;
     }

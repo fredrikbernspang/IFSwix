@@ -21,6 +21,13 @@ builder.Services.AddApiVersioning(options =>
         options.SubstituteApiVersionInUrl = true;
     });
 
+// Add http client with Aspire service discovery
+builder.Services.AddHttpClient("vehicleInfoApiService", client =>
+    {
+        // This URL uses "https+http://" to indicate HTTPS is preferred over HTTP.
+        client.BaseAddress = new("https+http://vehicleInfoApiService");
+    });
+
 // Add OpenAPI/Swagger for development
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

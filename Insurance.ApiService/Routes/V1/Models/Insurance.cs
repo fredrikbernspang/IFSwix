@@ -2,6 +2,7 @@ namespace InsuranceInfo.Models;
 
 using Newtonsoft.Json;
 using JsonSubTypes;
+using VehicleInfo.Models;
 
 [JsonConverter(typeof(JsonSubtypes), "Type")]
 [JsonSubtypes.KnownSubType(typeof(CarInsurance), "Car Insurance")]
@@ -20,8 +21,12 @@ public record CarInsurance(
     DateTime? StartDate,
     DateTime? EndDate,
     int Price,
-    string RegistrationNumber
-) : Insurance(Id, PolicyNumber, "Car Insurance", StartDate, EndDate, Price);
+    string LicensePlate
+) : Insurance(Id, PolicyNumber, "Car Insurance", StartDate, EndDate, Price)
+{
+    public Vehicle? Vehicle { get; set; } 
+    public string LicensePlate { get; set; } 
+};
 
 public static class InsuranceData
 {
@@ -43,7 +48,7 @@ public static class InsuranceData
         20
     );
 
-    public static readonly Insurance CarInsurance = new CarInsurance(
+    public static readonly CarInsurance CarInsurance = new CarInsurance(
         Guid.NewGuid(),
         "CAR-001",
         DateTime.Today,

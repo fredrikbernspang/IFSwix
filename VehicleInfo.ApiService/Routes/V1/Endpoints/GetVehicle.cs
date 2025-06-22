@@ -3,9 +3,9 @@ using VehicleInfo.Models;
 public static class GetVehicle
 {
 
-    public static Vehicle? Single(string regnum)
+    public static Vehicle? Single(string licensePlate)
     {
-        return VehicleData.Vehicles.GetValueOrDefault(regnum);
+        return VehicleData.Vehicles.GetValueOrDefault(licensePlate);
     }
 
     public static List<Vehicle> All()

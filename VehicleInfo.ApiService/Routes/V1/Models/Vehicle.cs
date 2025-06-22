@@ -1,7 +1,7 @@
 namespace VehicleInfo.Models;
 
 public record Vehicle(
-    string RegistrationNumber,
+    string LicensePlate,
     string Make,
     string Model,
     int Year,
