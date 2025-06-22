@@ -13,7 +13,7 @@ Then check the output for something like this:
 ```
 Login to the dashboard at https://localhost:17197/login?t=<token>
 ```
-This link will take you to the Aspire dashboard where you can access the individual services among other things. If you press the URLs of one of the API services you are redirected to the swaggerui for that API.
+This link will take you to the Aspire dashboard where you can access the individual services among other things. If you press the URLs of one of the API services you are redirected to the SwaggerUI for that API. From SwaggerUI its simple to test both APIs, both have an endpoint that requires no input and returns all testdata, that way you can easily understand what input to use for the "real" methods of the API. 
 
 **Discusses your approach to error handling, extensibility, and (if applicable) security**
 

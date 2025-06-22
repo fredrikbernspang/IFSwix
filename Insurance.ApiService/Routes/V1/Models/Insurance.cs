@@ -20,8 +20,7 @@ public record CarInsurance(
     string? PolicyNumber,
     DateTime? StartDate,
     DateTime? EndDate,
-    int Price,
-    string LicensePlate
+    int Price
 ) : Insurance(Id, PolicyNumber, "Car Insurance", StartDate, EndDate, Price)
 {
     public Vehicle? Vehicle { get; set; } 
@@ -53,7 +52,6 @@ public static class InsuranceData
         "CAR-001",
         DateTime.Today,
         DateTime.Today.AddYears(1),
-        30,
-        "ABC123"
+        30
     );
 }
