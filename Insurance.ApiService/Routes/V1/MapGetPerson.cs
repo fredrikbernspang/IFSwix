@@ -29,6 +29,8 @@ public static class MapGetPerson
             return Results.Content(json, "application/json");
         })
         .WithName("GetPersonById")
+        .Produces<InsuranceInfo.Models.Person>(StatusCodes.Status200OK)
+        .Produces(StatusCodes.Status404NotFound)
         .WithOpenApi(operation =>
         {
             operation.Description = "Accepts a personal identification number and returns all the insurances the person has, along with their monthly costs.";

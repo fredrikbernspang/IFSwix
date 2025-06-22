@@ -18,20 +18,22 @@ public static class MapGetVehicle
             .WithApiVersionSet(versionSet)
             .MapToApiVersion(1.0);
 
-        vehicleGroupV1.MapGet("/{regnum}", (string regnum) =>
+        vehicleGroupV1.MapGet("/{licensePlate}", (string licensePlate) =>
         {
-            var resultset = GetVehicle.Single(regnum);
+            var resultset = GetVehicle.Single(licensePlate);
             return resultset is not null
                 ? Results.Ok(resultset)
                 : Results.NotFound();
         })
         .WithName("GetVehicle")
+        .Produces<VehicleInfo.Models.Vehicle>(StatusCodes.Status200OK)
+        .Produces(StatusCodes.Status404NotFound)
         .WithOpenApi(operation =>
         {
-            operation.Description = "Accepts a vehicle registration number and returns information about the vehicle.";
+            operation.Description = "Accepts a vehicle license plate and returns information about the vehicle.";
             return operation;
         });
-        
+
         if (app.Environment.IsDevelopment())
         {
             vehicleGroupV1.MapGet("/", () =>
