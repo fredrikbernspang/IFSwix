@@ -40,6 +40,6 @@ app.UseExceptionHandler();
 app.MapDefaultEndpoints();
 
 // Add endpoints
-app.MapGetInsuranceRoute();
+app.MapGetPersonRoute();
 
 app.Run();

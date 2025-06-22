@@ -1,9 +1,9 @@
 using Asp.Versioning;
 
-public static class MapGetInsurance
+public static class MapGetPerson
 {
 
-    public static WebApplication MapGetInsuranceRoute(this WebApplication app)
+    public static WebApplication MapGetPersonRoute(this WebApplication app)
     {
         // Redirect root to Swagger UI
         app.MapGet("/", () => Results.Redirect("/swagger/index.html"))
@@ -14,7 +14,7 @@ public static class MapGetInsurance
                 .ReportApiVersions()
                 .Build();
 
-        var vehicleGroupV1 = app.MapGroup("/api/v{version:apiVersion}/insurance")
+        var vehicleGroupV1 = app.MapGroup("/api/v{version:apiVersion}/person")
             .WithApiVersionSet(versionSet)
             .MapToApiVersion(1.0);
 
@@ -22,27 +22,27 @@ public static class MapGetInsurance
         {
             vehicleGroupV1.MapGet("/", () =>
             {
-                var resultset = GetInsurance.All();
+                var resultset = GetPerson.All();
                 return resultset is not null
                     ? Results.Ok(resultset)
                     : Results.NotFound();
             })
-            .WithName("GetAllInsurances")
+            .WithName("GetAllPersons")
             .WithOpenApi(operation =>
             {
-                operation.Description = "Returns all insurances found (testing purposes only).";
+                operation.Description = "Returns all persons found and their insurances (testing purposes only).";
                 return operation;
             });
         }
 
         vehicleGroupV1.MapGet("/{id}", (string id) =>
         {
-            var resultset = GetInsurance.Single(id);
+            var resultset = GetPerson.Single(id);
             return resultset is not null
                 ? Results.Ok(resultset)
                 : Results.NotFound();
         })
-        .WithName("GetInsurance")
+        .WithName("GetPersonById")
         .WithOpenApi(operation =>
         {
             operation.Description = "Accepts a personal identification number and returns all the insurances the person has, along with their monthly costs.";
