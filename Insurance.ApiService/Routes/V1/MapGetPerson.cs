@@ -18,9 +18,13 @@ public static class MapGetPerson
             .WithApiVersionSet(versionSet)
             .MapToApiVersion(1.0);
 
-        vehicleGroupV1.MapGet("/{id}", async (IHttpClientFactory httpClientFactory, string id) =>
+        vehicleGroupV1.MapGet("/{id}", async (
+            IHttpClientFactory httpClientFactory,
+            string id,
+            bool mockVehicleApi = false // Query parameter
+        ) =>
         {
-            var resultset = await GetPerson.SingleAsync(httpClientFactory, id);
+            var resultset = await GetPerson.SingleAsync(httpClientFactory, id, mockVehicleApi);
             if (resultset is null)
                 return Results.NotFound();
 
