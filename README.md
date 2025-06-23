@@ -1,7 +1,12 @@
 # IF Swix
 **Explains your architecture and design decisions**
 
-I decided to use Aspire to create two Minimal API apps. It felt like a really good fit, especially since the requirement was that endpoint1 calls endpoint2 and Aspire has really cool and powerful tracing functionality that supports this out of the box. As for the APIs I have used a folder based structure for the routes that simplifies API versioning.
+I decided to use Aspire to create two Minimal API apps. It felt like a really good fit, especially since the requirement was that endpoint1 calls endpoint2 and Aspire has really cool and powerful [tracing functionality that supports this out of the box](#aspiretraces). To easily test the tracing functionality of Aspire I decided to add a feature flag **useMockVehicleApi** to mock the call to endpoint2 as illustrated in this screenshot:
+
+![Feature Flag](docs/InsuranceAPI_FeatureFlag.jpg)
+
+Since this is exposed as a query parameter the caller can explicitly set useMockVehicleApi, or, if left unset (-- in SwaggerUI), the system falls back to a feature flag set in Insurance.ApiService\appsettings.json (utilizing Microsoft.FeatureManagement).  
+For the two minimal APIs I have used a folder based structure for the routes that simplifies API versioning.
 
 **Describes how to run and test the solution locally**
 
@@ -36,7 +41,7 @@ In the past I have also worked on similar projects at H&M, there we used Azure F
 
 **Q: What you would improve or extend if you had more time.**
 
-**A:** Replace the hardcoded testdata in the models with an SQL db/Redis cache or similar to make it more realistic. Improve the OpenAPI spec by adding a more realistic example response and not just schema generated.
+**A:** Replace the hardcoded testdata in the models with an SQL db/Redis cache or similar to make it more realistic. Improve the OpenAPI spec by adding a more realistic example response and not just schema generated. It would also make sense to introduce Azure App Configuration for dynamic control of the feature flag (unless Microsoft decides to add support for this directly in the Aspire dashboard).
 
 
 ## Aspire sneak peak
@@ -47,4 +52,4 @@ Below is a screenshot of the Aspire dashboard that shows the two minimal API app
 
 Below is a screenshot that shows the traces from Aspire which spans across both APIs. This is because the trace shows a call to the insurance API with the input of a person who has a car insurance, hence the second call to the vehicle API to fetch vehicle info.
 
-![Aspire traces](docs/Aspire_traces.jpg)
+<a name="aspiretraces"></a>![Aspire traces](docs/Aspire_traces.jpg)

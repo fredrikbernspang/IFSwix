@@ -1,4 +1,5 @@
 using Asp.Versioning;
+using Microsoft.FeatureManagement;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,7 @@ builder.AddServiceDefaults();
 
 // Add services
 builder.Services.AddProblemDetails();
+builder.Services.AddFeatureManagement();
 
 // Add versioning services
 builder.Services.AddApiVersioning(options =>

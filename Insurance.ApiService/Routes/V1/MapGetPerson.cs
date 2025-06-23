@@ -1,4 +1,6 @@
 using Asp.Versioning;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.FeatureManagement;
 
 public static class MapGetPerson
 {
@@ -19,12 +21,13 @@ public static class MapGetPerson
             .MapToApiVersion(1.0);
 
         personGroupV1.MapGet("/{id}", async (
-            IHttpClientFactory httpClientFactory,
             string id,
-            bool mockVehicleApi = false // Query parameter
+            IHttpClientFactory httpClientFactory,
+            IFeatureManager featureManager,
+            [FromQuery] bool? useMockVehicleApi
         ) =>
         {
-            var resultset = await GetPerson.SingleAsync(httpClientFactory, id, mockVehicleApi);
+            var resultset = await GetPerson.SingleAsync(id, httpClientFactory, featureManager, useMockVehicleApi);
             if (resultset is null)
                 return Results.NotFound();
 
