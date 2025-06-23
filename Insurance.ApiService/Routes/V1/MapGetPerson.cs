@@ -14,11 +14,11 @@ public static class MapGetPerson
                 .ReportApiVersions()
                 .Build();
 
-        var vehicleGroupV1 = app.MapGroup("/api/v{version:apiVersion}/person")
+        var personGroupV1 = app.MapGroup("/api/v{version:apiVersion}/person")
             .WithApiVersionSet(versionSet)
             .MapToApiVersion(1.0);
 
-        vehicleGroupV1.MapGet("/{id}", async (
+        personGroupV1.MapGet("/{id}", async (
             IHttpClientFactory httpClientFactory,
             string id,
             bool mockVehicleApi = false // Query parameter
@@ -44,7 +44,7 @@ public static class MapGetPerson
                 // Only expose this endpoint in dev
         if (app.Environment.IsDevelopment())
         {
-            vehicleGroupV1.MapGet("/", () =>
+            personGroupV1.MapGet("/", () =>
             {
                 var resultset = GetPerson.All();
                 if (resultset is null)
