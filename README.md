@@ -18,7 +18,7 @@ Then check the output for something like this:
 ```
 Login to the dashboard at https://localhost:17197/login?t=<token>
 ```
-This link will take you to the Aspire dashboard (see screenshots at the bottom of this readme) where you can access the individual services among other things. If you press the URLs of one of the API services you are redirected to the SwaggerUI for that API. From SwaggerUI its simple to test both APIs, both have an endpoint that requires no input and returns all testdata, that way you can easily understand what input to use for the "real" methods of the API. 
+This link will take you to the [Aspire dashboard](#aspiredashboard) where you can access the individual services among other things. If you press the URLs of one of the API services you are redirected to the SwaggerUI for that API. From SwaggerUI its simple to test both APIs, both have an endpoint that requires no input and returns all testdata, that way you can easily understand what input to use for the "real" methods of the API. 
 
 **Discusses your approach to error handling, extensibility, and (if applicable) security**
 
@@ -48,7 +48,7 @@ In the past I have also worked on similar projects at H&M, there we used Azure F
 
 Below is a screenshot of the Aspire dashboard that shows the two minimal API applications in this solution running locally:
 
-![Aspire resources](docs/Aspire_resources.jpg)
+<a name="aspiredashboard"></a>![Aspire resources](docs/Aspire_resources.jpg)
 
 Below is a screenshot that shows the traces from Aspire which spans across both APIs. This is because the trace shows a call to the insurance API with the input of a person who has a car insurance, hence the second call to the vehicle API to fetch vehicle info.
 
